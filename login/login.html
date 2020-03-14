@@ -1,0 +1,53 @@
+<html lang="en">
+
+  <head>
+    <title>Item</title>
+    <meta name="google-signin-client_id" content="487864700073-g956o7354n0md6k8eogk34rtvbep4agr.apps.googleusercontent.com">
+    <title> Login Item </title>
+    <link rel="stylesheet"href="css/master.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+  </head>
+
+  <body>
+    <div class = "login-box">
+      <img class="avatar"src="img/avatar-01.png"alt="logo de fazt">
+      <h1>User Login</h1>
+
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <div id="content"></div>
+      <a href="http://localhost:8000/hello" onclick="signOut();">
+        <h2>Sign out</h2>
+      </a>
+    </div>
+  </body>
+
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+          var profile = googleUser.getBasicProfile();
+        console.log('User is '+ JSON.stringify(profile))
+
+          var element = document.querySelector('#content')
+          element.innerText = profile.getName();
+
+           var image = document.createElement('img');
+           image.setAttribute('src', profile.getImageUrl())
+            element.append(image)
+      }
+      function signOut() {
+            gapi.auth2.getAuthInstance().signOut().then(function () {
+                console.log('user signed out')
+            })
+      }
+   </script>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+</script>
+</html>
